@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <form action="params" method="get">
+      <div>
+        <p> Zoomdata Information Credentials</p>
+        <input type="text" name="zdHost" placeholder="http://localhost"/>
+        <input type="text" name="zdPort" placeholder="8080"/>
+      </div>
+
+      <br>
+
+      <div>
+        <p> Supervisor Credentials</p>
+        <input type="text" name="zdSuperName" placeholder="Username"/>
+        <input type="password" name="zdSuperPass" placeholder="Password"/>
+      </div>
+
+      <br>
+
+      <div>
+        <p> Administrator Credentials</p>
+        <input type="text" name="zdAdminName" placeholder="Username"/>
+        <input type="password" name="zdAdminPass" placeholder="Password"/>
+      </div>
+
+      <br>
+
+      <input type="submit" value="Get Credentials"/>
+    </form>
+  </body>
+</html>
