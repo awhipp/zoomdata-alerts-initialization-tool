@@ -4,4 +4,4 @@ A very simple Zoomdata Node Application that will send credentials and retrieve 
 
 ## To Run
 
-Install node, and execute `npm install`. From here just run the node express server and go to localhost:3000 to fill in the requested credentials.
+Install node, and execute `npm install`. From here just run the node express server (`npm start` in `bin/www`) and go to localhost:3000 to fill in the requested credentials.
