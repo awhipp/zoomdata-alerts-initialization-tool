@@ -12,6 +12,22 @@ router.get('/', function(req, res) {
 });
 
 router.get('/params', function (req, res) {
+    var callbackUrls = req.query.callbackUrls.split(",");
+    for (var i = 0; i < callbackUrls.length; i++) {
+        while (callbackUrls[i].indexOf(" ") >= 0) {
+            callbackUrls[i] = callbackUrls[i].replace(" ","");
+        }
+    }
+
+    var callbacks = "[";
+    for(var i = 0; i < callbackUrls.length; i++) {
+        callbacks += "\"" + callbackUrls[i] + "\"";
+        if (i+1 != callbackUrls.length) {
+            callbacks += ",";
+        }
+    }
+    callbacks += "]";
+
     var payload = {
         "zdSuperName" : req.query.zdSuperName,
         "zdSuperPass" : req.query.zdSuperPass,
@@ -19,6 +35,7 @@ router.get('/params', function (req, res) {
         "zdAdminPass" : req.query.zdAdminPass,
         "zdHost" : req.query.zdHost,
         "zdPort" : req.query.zdPort,
+        "callbackUrls" : callbacks,
         "clientId" : "",
         "accessToken" : ""
     };
@@ -48,8 +65,9 @@ var getClientId = function (res, payload) {
             url: url,
             headers: headers,
             body: '{"clientName": "' + payload.zdSuperName + '", ' +
-            '"registeredRedirectURIs": ["http://localhost:3000/callback.html"], ' +
-            '"autoApprove": false}'
+            '"registeredRedirectURIs": ' + payload.callbackUrls + ', ' +
+            '"autoApprove": true,' +
+            '"accessTokenValiditySeconds": 99999999}'
         },
         function (e, r, body) {
             payload.clientId = JSON.parse(body).clientId;
