@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var request = require('request');
+var path = require('path');
+
 router.use(bodyParser.json());
 // in latest body-parser use like below.
 router.use(bodyParser.urlencoded({extended: true}));
@@ -14,7 +16,7 @@ router.get('/', function(req, res) {
 
 var template;
 
-fs.readFile('./init.yml.template', 'utf8', function (err, data) {
+fs.readFile(path.join(__dirname, '../init.yml.template'), 'utf8', function (err, data) {
     if (err) {
         return console.log(err);
     }
@@ -91,7 +93,6 @@ var getClientId = function (res, payload) {
         'content-type': 'application/vnd.zoomdata+json',
         "Authorization": auth
     };
-    console.log(url);
 
     request.post(
         {
@@ -103,7 +104,6 @@ var getClientId = function (res, payload) {
             '"accessTokenValiditySeconds": 99999999}'
         },
         function (e, r, body) {
-            console.log(body);
             payload.ZOOMDATA_CLIENTID = JSON.parse(body).clientId;
             getAccessToken(res, payload);
         }
@@ -139,17 +139,10 @@ var getAccessToken = function (res, payload) {
 };
 
 var sendResponse = function (res, payload) {
-
-    console.log(template);
     var resultingTemplate = fillTemplate(payload);
 
     res.set({"Content-Disposition": "attachment; filename=init.yml"});
     res.send(resultingTemplate);
-
-    // res.json({
-    //     "clientId": payload.clientId,
-    //     "accessToken": payload.accessToken
-    // })
 }
 
 var fillTemplate = function(payload) {
