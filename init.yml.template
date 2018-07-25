@@ -1,0 +1,48 @@
+version: '2'
+services:
+  base:
+    environment:
+      # Logging Mode
+      - LOGGING_MODE=${LOG}
+
+      # Consul Settings
+      - spring.cloud.consul.host=${CONSUL_HOST}
+      - spring.cloud.consul.port=${CONSUL_PORT}
+      - spring.cloud.consul.enabled=${CONSUL_ENABLED}
+      - spring.rabbitmq.addresses=${RABBIT_URL}
+
+      # Postgres Settings
+      - spring.datasource.url=${POSTGRES_URL}
+      - spring.datasource.username=${POSTGRES_USERNAME}
+      - spring.datasource.password=${POSTGRES_PASSWORD}
+
+      # Zoomdata Settings
+      - zoomdata.url=${ZOOMDATA_URL}:${ZOOMDATA_PORT}/zoomdata
+      # - zoomdata.private.url=${ZOOMDATA_PRIVATE_URL}
+      - zoomdata.username=${ADMIN_USERNAME}
+      - zoomdata.password=${ADMIN_PASSWORD}
+      - zoomdata.clientid=${ZOOMDATA_CLIENTID}
+      - zoomdata.accessToken=${ZOOMDATA_ACCESSTOKEN}
+
+      # Alerts Settings
+      - alerts.show.url=${SHOW_URL}
+      - alerts.zoomdata.priorities=${ALERT_PRIORITIES}
+
+      # SSL Settings
+      - alerts.allow.unsigned.ssl=${ALLOW_UNSIGNED_SSL}
+      - server.port=${SSL_PORT}
+      - server.ssl.key-store=${SSL_KEYSTORE_LOCATION}
+      - server.ssl-key-store-password=${SSL_KEYSTORE_PASSWORD}
+
+      # Mail Settings
+      - alerts.mail.host=${MAIL_SERVER_HOST}
+      - alerts.mail.port=${MAIL_SERVER_PORT}
+      - alerts.mail.from=${MAIL_SERVER_FROM}
+      - alerts.mail.username=${MAIL_SERVER_USERNAME}
+      - alerts.mail.password=${MAIL_SERVER_PASSWORD}
+      - alerts.mail.auth=${MAIL_SERVER_AUTH}
+      - alerts.mail.ssl.enabled=${MAIL_SERVER_SSL}
+      - alerts.mail.starttls.enable=${MAIL_SERVER_STARTTLS_ENABLED}
+      - alerts.mail.starttls.required=${MAIL_SERVER_STARTTLS_REQUIRED}
+      - alerts.mail.socketFactory.fallback=${MAIL_SERVER_SOCKETFACTORY_FALLBACK}
+      - alerts.mail.socketFactory.port=${MAIL_SERVER_SOCKETFACTORY_PORT}

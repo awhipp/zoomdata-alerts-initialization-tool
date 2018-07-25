@@ -7,11 +7,14 @@
   <body>
     <h1><%= title %></h1>
 
+    <hr>
+
     <form action="params" method="get">
+      <h2> Oauth2 Settings </h2>
       <div>
         <p> Zoomdata Information Credentials</p>
-        <input type="text" name="zdHost" placeholder="http://localhost"/>
-        <input type="text" name="zdPort" placeholder="8080"/>
+        <input type="text" name="ZOOMDATA_URL" placeholder="http://localhost"/>
+        <input type="text" name="ZOOMDATA_PORT" placeholder="8080"/>
       </div>
 
       <br>
@@ -26,22 +29,143 @@
 
       <div>
         <p> Administrator Credentials</p>
-        <input type="text" name="zdAdminName" placeholder="Username"/>
-        <input type="password" name="zdAdminPass" placeholder="Password"/>
+        <input type="text" name="ADMIN_USERNAME" placeholder="Username"/>
+        <input type="password" name="ADMIN_PASSWORD" placeholder="Password"/>
       </div>
 
       <br>
 
       <div>
-        <p> Other Information</p>
+        <p> Callback URLs <small>(typically where your alerts installation is)</small></p>
         <textarea name="callbackUrls"
                style="min-width: 275px; min-height: 100px;"
                placeholder="Callback URL list (comma separated)"></textarea>
       </div>
 
-      <br>
+      <hr>
 
-      <input type="submit" value="Get Credentials"/>
+      <h2> Consul Settings </h2>
+      <div>
+        <p> Consul Enabled? </p>
+        <select name="CONSUL_ENABLED">
+          <option value="true" selected>true</option>
+          <option value="false">false</option>
+        </select>
+        <p> Consul Host / Port
+          <small>(leave empty for default)</small></p>
+        <input type="text" name="CONSUL_HOST" placeholder="http://localhost"/>
+        <input type="text" name="CONSUL_PORT" placeholder="8500"/>
+      </div>
+
+      <hr>
+
+      <h2> Rabbit MQ Location </h2>
+      <div>
+        <p>Rabbit Address
+          <small>(leave empty for default)</small></p>
+        <input type="text" name="RABBIT_URL" placeholder="rabbitmq:5672"/>
+      </div>
+
+      <hr>
+
+      <h2> Postgres Settings </h2>
+      <div>
+        <p>Postgres URL
+          <small>(leave empty for default)</small></p>
+        <input type="text" name="POSTGRES_URL" placeholder="jdbc:postgresql://postgres:5432/alerts"/>
+        <p>Postgres Username</p>
+        <input type="text" name="POSTGRES_USERNAME" placeholder="username"/>
+        <p>Postgres Password</p>
+        <input type="password" name="POSTGRES_PASSWORD" placeholder="password"/>
+      </div>
+
+      <hr>
+
+      <h2> SSL Settings </h2>
+      <div>
+        <p>Allow unsigned SSL</p>
+        <select name="ALLOW_UNSIGNED_SSL">
+          <option value="true" selected>true</option>
+          <option value="false">false</option>
+        </select>
+        <p>SSL Port <small>(if you want it enabled)</small></p>
+        <input type="text" name="SSL_PORT" placeholder="8443"/>
+        <p>Keystore Location</p>
+        <input type="text" name="SSL_KEYSTORE_LOCATION" placeholder="/opt/zoomdata/"/>
+        <p>Keystore Password</p>
+        <input type="password" name="SSL_KEYSTORE_PASSWORD" placeholder="password"/>
+      </div>
+
+      <hr>
+
+      <h2> Mail Settings </h2>
+      <div>
+        <p>Mail Server Host</p>
+        <input type="text" name="MAIL_SERVER_HOST" placeholder="localhost"/>
+        <p>Mail Server Port</p>
+        <input type="text" name="MAIL_SERVER_PORT" placeholder="25"/>
+        <p>Mail Server FROM Email Address</p>
+        <input type="text" name="MAIL_SERVER_FROM" placeholder="alert@mailserver.com"/>
+        <p>Enable Authentication to the Mail Server</p>
+        <select name="MAIL_SERVER_AUTH">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+        <p>Mail Username
+          <small>(if enabled)</small>
+        </p>
+        <input type="text" name="MAIL_SERVER_USERNAME" placeholder="username"/>
+        <p>Mail Password
+          <small>(if enabled)</small>
+        </p>
+        <input type="password" name="MAIL_SERVER_PASSWORD" placeholder="password"/>
+        <p>Enable SSL Connection to Mail Server</p>
+        <select name="MAIL_SERVER_SSL">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+        <p>Start TLS Enabled</p>
+        <select name="MAIL_SERVER_STARTTLS_ENABLED">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+        <p>Start TLS Required</p>
+        <select name="MAIL_SERVER_STARTTLS_REQUIRED">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+        <p>Enable Socket Factory Fallback to Mail Server</p>
+        <select name="MAIL_SERVER_SOCKETFACTORY_FALLBACK">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+        <p> Socket Factory Port <small>(if enabled)</small></p>
+        <input type="text" name="MAIL_SERVER_SOCKETFACTORY_PORT" placeholder="783"/>
+      </div>
+
+      <hr>
+
+      <h2> Alerts Settings </h2>
+      <div>
+        <p> Show Zoomdata URL in Application </p>
+        <select name="SHOW_URL">
+          <option value="true" selected>true</option>
+          <option value="false">false</option>
+        </select>
+        <p>Logging Mode</p>
+        <select name="LOG">
+          <option value="INFO" selected>INFO</option>
+          <option value="DEBUG">DEBUG</option>
+          <option value="ERROR">ERROR</option>
+          <option value="WARN">WARN</option>
+        </select>
+        <p> Alerting Priorities <small>(leave empty for default)</small></p>
+        <input type="text" name="ALERT_PRIORITIES" placeholder="low,medium,high,critical"/>
+      </div>
+
+      <hr>
+
+      <input type="submit" value="Get YAML File"/>
     </form>
   </body>
 </html>
